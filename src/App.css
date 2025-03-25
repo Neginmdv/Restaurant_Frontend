@@ -1,0 +1,308 @@
+/* Layout */
+/* Centers content and sets a max width */
+.container {
+  max-width: 800px;
+  margin: auto;
+  text-align: right;
+}
+
+/* Category Filter Buttons */
+/* Styles the category filter container */
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+/* Styles for category buttons */
+.category-filter button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect on category buttons */
+.category-filter button:hover {
+  background-color: #555;
+  color: white;
+}
+
+/* Active category button */
+.category-filter button.active {
+  background-color: #555;
+  color: white;
+  font-weight: bold;
+}
+
+/* Menu Page */
+/* Styles the grid layout for menu items */
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  padding-bottom: 60px;
+}
+
+/* Styles for each menu item (product card) */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: 250px;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.24);
+}
+
+/* Hover effect for menu items */
+.menu-item:hover {
+  background-color: #c3c3c373;
+}
+
+/* Styles for menu images */
+.menu-image {
+  width: 220px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Layout adjustments for menu content */
+.menu-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .menu-grid {
+    gap: 10px; /* Smaller gap on mobile */
+  }
+
+  .menu-item {
+    width: 48%; 
+    padding: 10px;
+  }
+
+  .menu-image {
+    width: 100%;
+    height: 150px;
+  }
+
+  /* Optional: Smaller text and controls */
+  .menu-item h3 { font-size: 16px; }
+  .menu-item p { font-size: 14px; }
+  .quantity-controls button {
+    width: 26px;
+    height: 26px;
+    font-size: 16px;
+  }
+  .quantity-controls span {
+    font-size: 14px;
+  }
+}
+
+
+/* Quantity Controls */
+/* Styles for quantity adjustment buttons */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Styles for quantity control buttons */
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Hover effect for quantity buttons */
+.quantity-controls button:hover {
+  background-color: #000;
+}
+
+/* Styles for quantity count display */
+.quantity-controls span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Popup Styles */
+/* Styles for the popup background overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styles for the popup content box */
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;   /* ✅ Makes it responsive on smaller screens */
+  max-height: 90vh; /* ✅ Prevents it from being too tall */
+  overflow-y: auto; /* ✅ Adds scroll if content is too long */
+  text-align: left;
+  position: relative;
+}
+
+
+/* Close button styles */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 30px;
+  color: rgb(193, 193, 193);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for close button */
+.close-btn:hover {
+  transform: scale(1.2);
+  color: rgb(113, 113, 113);
+}
+
+/* Styles for popup image */
+.popup-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+
+/* Info Page */
+/* Styles for the text content inside the info section */
+.info-content {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.info-section{
+  text-align: left;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+/* Cart Page */
+/* Removes default bullet points from cart list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Styles for each cart item */
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Styles for cart item images */
+.cart-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Styles for cart buttons container */
+.cart-buttons {
+  display: inline-flex;
+  gap: 5px;
+  margin-left: auto;
+}
+
+/* General styles for cart buttons */
+.cart-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove item button */
+.cart-btn.remove {
+  background-color: #848484;
+}
+
+/* Hover effect for remove button */
+.cart-btn.remove:hover {
+  background-color: #444;
+}
+
+/* Add item button */
+.cart-btn.add {
+  background-color: #848484;
+}
+
+/* Hover effect for add button */
+.cart-btn.add:hover {
+  background-color: #444;
+}
+
+/* Styles for "Clear Cart" button */
+.clear-cart {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Hover effect for "Clear Cart" button */
+.clear-cart:hover {
+  background-color: #000;
+}
+
+/* Styles for total price display */
+.cart-summary {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 15px;
+}
