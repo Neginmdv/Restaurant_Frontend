@@ -17,11 +17,11 @@ fetch("http://77.153.9.61:8000/api/restaurant/")
       favicon.href = restaurant.logo || "/default-favicon.png"; // Use restaurant logo if available
 
       // Ensure the logo URL is properly formatted
-      let logoUrl = "/default-logo192.png"; // Default fallback
+      let logoUrl = "/default-logo192.png"; 
       if (restaurant.logo && !restaurant.logo.startsWith("http")) {
-        logoUrl = `http://77.153.9.61:8000${restaurant.logo}`; // Append base URL if needed
+        logoUrl = `http://77.153.9.61:8000${restaurant.logo}`; 
       } else if (restaurant.logo) {
-        logoUrl = restaurant.logo; // Use full URL if already correct
+        logoUrl = restaurant.logo; 
       }
 
       const newManifest = {

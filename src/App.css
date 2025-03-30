@@ -90,7 +90,7 @@
 
 @media (max-width: 768px) {
   .menu-grid {
-    gap: 10px; /* Smaller gap on mobile */
+    gap: 10px; /*Smaller gap on mobile*/
   }
 
   .menu-item {
@@ -103,7 +103,7 @@
     height: 150px;
   }
 
-  /* Optional: Smaller text and controls */
+  /*Smaller text and controls*/
   .menu-item h3 { font-size: 16px; }
   .menu-item p { font-size: 14px; }
   .quantity-controls button {
@@ -115,7 +115,6 @@
     font-size: 14px;
   }
 }
-
 
 /* Quantity Controls */
 /* Styles for quantity adjustment buttons */
@@ -170,13 +169,12 @@
   padding: 20px;
   border-radius: 10px;
   width: 400px;
-  max-width: 90%;   /* ✅ Makes it responsive on smaller screens */
-  max-height: 90vh; /* ✅ Prevents it from being too tall */
-  overflow-y: auto; /* ✅ Adds scroll if content is too long */
-  text-align: left;
+  max-width: 90%; /* Makes it responsive on smaller screens */
+  max-height: 90vh; /* Prevents it from being too tall */
+  overflow-y: auto; /* Adds scroll if content is too long */
+  text-align: center;
   position: relative;
 }
-
 
 /* Close button styles */
 .close-btn {
@@ -203,8 +201,6 @@
   object-fit: cover;
   border-radius: 10px;
 }
-
-
 
 /* Info Page */
 /* Styles for the text content inside the info section */
@@ -293,6 +289,7 @@ li {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 /* Hover effect for "Clear Cart" button */
@@ -300,9 +297,99 @@ li {
   background-color: #000;
 }
 
-/* Styles for total price display */
-.cart-summary {
-  margin-top: 20px;
+.cart-summary-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* Checkout form */
+.checkout-form {
+  max-width: 400px;
+  margin: 20px auto;
   text-align: left;
-  font-size: 15px;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.checkout-form input:focus {
+  border-color: #555;
+  outline: none;
+}
+
+.checkout-form h4 {
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Styles for order type selector */
+.order-type-selector {
+  margin-top: 15px;
+  margin-bottom:15px;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.order-type-selector label {
+  display: block;
+  font-weight: bold;
+  color: #000000;
+}
+
+.order-type-selector select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.order-type-selector select:focus {
+  border-color: #555;
+}
+
+.finalize {
+  height: 20x;
+  width: 100px;
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+}
+.finalize:hover {
+  background-color: #000;
+}
+
+.popup-buttons {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  gap: 20px;
 }

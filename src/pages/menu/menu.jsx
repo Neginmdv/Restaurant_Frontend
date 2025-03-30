@@ -33,7 +33,7 @@ const Menu = () => {
 
     // Handle errors during fetching
     if (menuError) return <p>Error loading menu: {menuError.message}</p>;
-    if (!menuItems.length) return <p>Loading menu...</p>;
+    if (!menuData && !menuError) return null;
 
     // Create a category map {id: name} for easy lookup
     const categoryMap = categories.reduce((acc, category) => {
@@ -72,7 +72,7 @@ const Menu = () => {
             <div className="menu-grid">
                 {filteredItems.map(item => (
                     <div key={item.id} className="menu-item" onClick={() => openPopup(item)}> {/* Click to Open Popup */}
-                        <img src={item.img || "/no-image.png"} alt={item.name} className="menu-image" />
+                        <img src={item.img || "/no-image.png"} alt={item.name || "Menu item"} className="menu-image" />
 
                         <div className="menu-content">
                             <h3>{item.name}</h3>
