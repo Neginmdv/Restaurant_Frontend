@@ -14,7 +14,7 @@ import useFetch from "./hooks/useFetch";
 
 function App() {
     // Fetch restaurant data to dynamically update the page title
-    const { data: resInfo } = useFetch("http://77.153.9.61:8000/api/restaurant/");
+    const { data: resInfo } = useFetch("/api/restaurant/");
 
     // Update the document title dynamically when restaurant data is loaded
     useEffect(() => {
@@ -32,12 +32,14 @@ function App() {
                 <Nav />
 
                 {/* Define application routes for different pages */}
-                <Routes>
-                    <Route path="/" element={<Menu />} /> {/* Default route - Menu Page */}
-                    <Route path="/menu" element={<Menu />} /> {/* Menu Page */}
-                    <Route path="/cart" element={<Cart />} /> {/* Cart Page */}
-                    <Route path="/info" element={<Info />} /> {/* Info Page */}
-                </Routes>
+                <div className="main-content">
+                    <Routes>
+                        <Route path="/" element={<Menu />} /> {/* Default route - Menu Page */}
+                        <Route path="/menu" element={<Menu />} /> {/* Menu Page */}
+                        <Route path="/cart" element={<Cart />} /> {/* Cart Page */}
+                        <Route path="/info" element={<Info />} /> {/* Info Page */}
+                    </Routes>
+                </div>
             </Router>
         </CartProvider>
     );

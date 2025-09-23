@@ -10,15 +10,24 @@ const Nav = () => {
 
     // Fetch restaurant info from API
     const { data: resInfo, error } = useFetch("http://77.153.9.61:8000/api/restaurant/");
+    const restaurant = resInfo?.results?.[0];
+
+    // Extract restaurant logo from API response
+    const restaurantLogo = restaurant?.logo || null;
 
     // Extract restaurant name from API response, defaulting to "Restaurant" if data is unavailable
-    const restaurantName = resInfo?.results?.length > 0 ? resInfo.results[0].name : "Restaurant";
+    const restaurantName = restaurant?.name || "Restaurant";
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
-                {/* Display restaurant name in the navbar */}
-                <h1>{restaurantName}</h1>
+                {/* Display restaurant name and logo in the navbar */}
+                <div className="navbar-brand d-flex align-items-center gap-2">
+                {restaurantLogo && (
+                    <img src={restaurantLogo} alt="Restaurant Logo" className="nav-logo" />
+                )}
+                <h1 className="restaurant-title">{restaurantName}</h1>
+                </div>
 
                 {/* Show error message if API request fails */}
                 {error && <p style={{ color: 'red' }}>Failed to load name</p>}

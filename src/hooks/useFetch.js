@@ -9,6 +9,7 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (!url) return;
         axios.get(url)
             .then(response => {
                 setData(response.data); // Store the fetched data in state

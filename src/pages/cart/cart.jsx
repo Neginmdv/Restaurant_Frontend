@@ -2,14 +2,17 @@ import React, { useContext , useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import useFetch from "../../hooks/useFetch";
 import CheckoutForm from "./CheckoutForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 const Cart = () => {
     const [formErrors, setFormErrors] = useState({ email: "", phone: "" });
     const [clientName, setClientName] = useState("");
     const [clientEmail, setClientEmail] = useState("");
     const [clientNum, setClientNum] = useState("");
-    const [tableNum, setTableNum] = useState(null);
-    const [orderType, setOrderType] = useState("Sur place");
+    const [tableNum, setTableNum] = useState("");
+    const [orderType, setOrderType] = useState("A emporter");
 
     // Local state for order submission
     const [showFinalizePopup, setShowFinalizePopup] = useState(false); // Popup confirmation state
@@ -46,11 +49,16 @@ const Cart = () => {
         
         if (clientNum && !isValidPhone(clientNum)) errors.phone = "Invalid phone number (e.g. +33612345678)";
 
+        if (orderType === "Sur place" && (!tableNum || tableNum === "")) {
+            alert("Please enter the table number for dine-in orders.");
+            return;
+        }
+        
         if (errors.email || errors.phone) {
             setFormErrors(errors);
             return;
         }
-
+        
         setFormErrors({email: "", phone: ""});
         setShowFinalizePopup(true);
     };
@@ -63,6 +71,15 @@ const Cart = () => {
         setOrderSuccess(false);
 
         try {
+            console.log("SENDING:", {
+                order_type: orderType,
+                client_name: clientName,
+                client_email: clientEmail,
+                client_num: clientNum,
+                table_number: tableNum,
+                is_validated: true
+              });
+              
             //Create the order
             const panierRes = await fetch("http://77.153.9.61:8000/api/panier/", {
                 method: "POST",
@@ -72,7 +89,7 @@ const Cart = () => {
                     client_name: clientName,
                     client_email: clientEmail,
                     client_num: clientNum,
-                    table_number: tableNum,
+                    table_number: orderType === "Sur place" ? tableNum : null,
                     is_validated: true
                 })
             });
@@ -133,8 +150,15 @@ const Cart = () => {
                         {item.name} - ${item.price} x {cart[item.id]}
                         {/* Buttons to modify quantity */}
                         <div className="cart-buttons">
-                            <button className="cart-btn remove" onClick={() => removeFromCart(item.id)}>-</button>
-                            <button className="cart-btn add" onClick={() => addToCart(item.id)}>+</button>
+                            <button className="cart-btn remove" onClick={() => removeFromCart(item.id)}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </button>
+                            <button className="cart-btn add" onClick={() => addToCart(item.id)}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </button>
+                            <button className="cart-btn trash" onClick={() => removeFromCart(item.id, true)}>
+                                <FontAwesomeIcon icon={faTrash} />
+                            </button>
                         </div>
                     </li>
                 ))}
@@ -156,8 +180,6 @@ const Cart = () => {
                         setClientEmail={setClientEmail}
                         clientNum={clientNum}
                         setClientNum={setClientNum}
-                        tableNum={tableNum}
-                        setTableNum={setTableNum}
                         formErrors={formErrors}
                         setFormErrors={setFormErrors}
                     />
@@ -169,6 +191,12 @@ const Cart = () => {
                             <option value="Sur place">Dine In</option>
                             <option value="A emporter">Takeaway</option>
                         </select>
+                        {orderType === "Sur place" && (
+                            <input type="number" placeholder="Table Number (required)" 
+                            value={tableNum} onChange={(e) => setTableNum(e.target.value)} 
+                            required className="table-form"/>
+                        )}
+
                     </div>
 
                     {/* Finalise order*/}

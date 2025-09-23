@@ -24,12 +24,15 @@ const CartProvider = ({ children }) => {
     };
 
     // Function to remove an item from the cart (decrements quantity, removes if zero)
-    const removeFromCart = (itemId) => {
+    const removeFromCart = (itemId, removeAll=false ) => {
         setCart(prevCart => {
             if (!prevCart[itemId]) return prevCart;
             const updatedCart = { ...prevCart };
-            updatedCart[itemId] -= 1;
-            if (updatedCart[itemId] === 0) delete updatedCart[itemId];
+            if (removeAll || updatedCart[itemId] === 1) {
+                delete updatedCart[itemId];
+            } else {
+                updatedCart[itemId] -= 1;
+            }
             return updatedCart;
         });
     };

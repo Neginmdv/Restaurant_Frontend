@@ -6,6 +6,34 @@
   text-align: right;
 }
 
+.custom-navbar{
+  height: 75px;
+  padding: 15px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.065);
+  position: fixed;
+  backdrop-filter: blur(10px);
+}
+
+/* Force consistent scrollbar behavior */
+html {
+  overflow-y: scroll;
+}
+
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.restaurant-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+
 /* Category Filter Buttons */
 /* Styles the category filter container */
 .category-filter {
@@ -47,8 +75,8 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  color: rgb(0, 0, 0);
-  padding-bottom: 60px;
+  align-items: stretch;
+  padding-bottom: 100px;
 }
 
 /* Styles for each menu item (product card) */
@@ -56,14 +84,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  text-align: center;
   cursor: pointer;
-  width: 250px;
+  height: 100%;
   padding: 15px;
   background-color: #f0f0f0;
   border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.24);
+  width: 250px;
+  min-height: 430px;
 }
 
 /* Hover effect for menu items */
@@ -85,7 +113,25 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+}
+
+.menu-content p:nth-child(2) {
+  min-height: 20px;
+}
+
+
+.menu-item h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  word-break: break-word;
+}
+
+.menu-item p {
+  font-size: 15px;
+  color: #161616;
+  margin: 5px 0;
 }
 
 @media (max-width: 768px) {
@@ -94,8 +140,9 @@
   }
 
   .menu-item {
-    width: 48%; 
+    width: 41%; 
     padding: 10px;
+    min-height: 350px;
   }
 
   .menu-image {
@@ -116,6 +163,12 @@
   }
 }
 
+.available, .not-available {
+  margin-top: auto;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* Quantity Controls */
 /* Styles for quantity adjustment buttons */
 .quantity-controls {
@@ -130,12 +183,15 @@
 .quantity-controls button {
   width: 30px;
   height: 30px;
-  font-size: 18px;
   border: none;
   background-color: #2c2c2c;
   color: white;
   cursor: pointer;
   border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 /* Hover effect for quantity buttons */
@@ -147,6 +203,14 @@
 .quantity-controls span {
   font-size: 18px;
   font-weight: bold;
+}
+
+.quantity-controls{
+  padding: 5px;
+}
+
+.quantity-controls button svg {
+  font-size: 12px;
 }
 
 /* Popup Styles */
@@ -174,6 +238,12 @@
   overflow-y: auto; /* Adds scroll if content is too long */
   text-align: center;
   position: relative;
+}
+
+.unavailable {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  pointer-events: none; /* prevents clicking */
 }
 
 /* Close button styles */
@@ -261,23 +331,17 @@ li {
   justify-content: center;
 }
 
+.cart-btn svg {
+  font-size: 12px;
+} 
+
 /* Remove item button */
-.cart-btn.remove {
+.cart-btn.remove, .cart-btn.add, .cart-btn.trash {
   background-color: #848484;
 }
 
 /* Hover effect for remove button */
-.cart-btn.remove:hover {
-  background-color: #444;
-}
-
-/* Add item button */
-.cart-btn.add {
-  background-color: #848484;
-}
-
-/* Hover effect for add button */
-.cart-btn.add:hover {
+.cart-btn.remove:hover ,.cart-btn.add:hover,.cart-btn.trash:hover {
   background-color: #444;
 }
 
@@ -312,6 +376,10 @@ li {
   text-align: left;
 }
 
+.checkout-form input:hover {
+  background-color: #ededed73;
+}
+
 .checkout-form input {
   width: 100%;
   padding: 10px;
@@ -329,6 +397,20 @@ li {
 .checkout-form h4 {
   margin-bottom: 10px;
   color: #000000;
+}
+
+.table-form {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-color: #555;
+  outline: none;
 }
 
 .modal-overlay {

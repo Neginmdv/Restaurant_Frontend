@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 
 const Info = () => {
   // Fetch restaurant information from API
   const { data: resInfo, error } = useFetch("http://77.153.9.61:8000/api/restaurant/");
-
-  // State to store opening hours
-  const [hours, setHours] = useState([]);
   
   // Fetch opening hours
-  useEffect(() => {
-    if (resInfo?.results?.length > 0) {
-      const restaurantId = resInfo.results[0].id;
-      fetch(`http://77.153.9.61:8000/api/horaire/?restaurant=${restaurantId}`)
-        .then(response => response.json())
-        .then(data => setHours(data.results || []))
-        .catch(err => console.error("Error loading opening hours:", err));
-    }
-  }, [resInfo]);
+  const restaurantId = resInfo?.results?.[0]?.id;
+  const hoursUrl = restaurantId
+    ? `http://77.153.9.61:8000/api/horaire/?restaurant=${restaurantId}`
+    : null;
+  
+  const { data: hoursData, error: hoursError } = useFetch(hoursUrl);
+  const hours = Array.isArray(hoursData?.results) ? hoursData.results : [];
+  if (hoursError) return <p>Error loading opening hours: {hoursError.message}</p>;
+
 
   // Display an error message if the API request fails
   if (error) return <p>Error loading restaurant info: {error.message}</p>;
@@ -49,10 +45,10 @@ const Info = () => {
         {/* Display opening hours */}
         {hours.length > 0 && (
           <div>
-            <p><strong>Openning Hours</strong></p>
+            <p><strong>Opening Hours</strong></p>
             {hours.map(h => (
               <p key={h.id}>
-                {h.jour} : {h.heure_ouverture} - {h.heure_fermeture}
+              {h.jour} : {h.heure_ouverture.slice(0, 5)} - {h.heure_fermeture.slice(0, 5)}
               </p>
             ))}
           </div>
